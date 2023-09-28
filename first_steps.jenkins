@@ -1,1 +1,24 @@
+#!groovy
+properties([diasbleConcurrentBuilds()])
 
+pipeline{
+  agent {
+      label 'master'
+  }
+  options {
+      buildiscarder (logRotator (numToKeepstr: '10', artifactNumToKeepStr: '10))
+      timestamps()
+  }
+  stages {
+      stage("First step") {
+          steps {
+              sh 'ping mail.ru/'
+                }
+      }
+      stage ("Second step") {
+          steps {
+              sh 'ping https://mtkp.bmstu.ru/'
+                }
+      }
+  }  
+}
